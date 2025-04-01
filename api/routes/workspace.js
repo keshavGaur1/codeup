@@ -24,7 +24,7 @@ router.get("/", authMiddleware, async (req, res) => {
   try {
     const workspaces = await Workspace.find({
       $or: [
-        { "members.userId": req.user.id },
+        { "members.userId": req.user.id },  // user jisme member hai
         { isPublic: true },
       ],
     }).populate("members.userId", "displayName email");
@@ -78,7 +78,7 @@ router.post("/invite", authMiddleware, async (req, res) => {
   }
 });
 
-
+// Fetch a Single Workspace by ID
 router.get("/:id", authMiddleware, async (req, res) => {
   try {
     const workspace = await Workspace.findById(req.params.id).populate("members.userId", "displayName email");
@@ -91,7 +91,7 @@ router.get("/:id", authMiddleware, async (req, res) => {
   }
 });
 
-
+// Fetch Workspaces Owned by a User
 router.get("/user/:userId/workspaces", authMiddleware, async (req, res) => {
   try {
     const { userId } = req.params;

@@ -1,8 +1,8 @@
 import express from "express";
 import mongoose from "mongoose";
-import cors from "cors";
+import cors from "cors";  
 import dotenv from "dotenv";
-import session from "express-session";
+import session from "express-session"; // middleware for user session management
 import MongoStore from "connect-mongo";
 import { fileURLToPath } from "url";
 import path from "path";
@@ -19,6 +19,7 @@ import liveblocksRoutes from "./routes/liveblocks.js";
 dotenv.config();
 const app = express();
 
+// Fix __dirname for ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -31,6 +32,8 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 
+// Serves static files from the "uploads" directory
+// This is where the uploaded files will be stored
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 

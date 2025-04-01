@@ -4,7 +4,6 @@ import authMiddleware from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-
 router.get("/workspace/:workspaceId", authMiddleware, async (req, res) => {
   try {
     const files = await File.find({ workspaceId: req.params.workspaceId });
@@ -25,7 +24,6 @@ router.post("/create", authMiddleware, async (req, res) => {
   }
 });
 
-
 router.put("/:id", authMiddleware, async (req, res) => {
   try {
     const file = await File.findByIdAndUpdate(
@@ -39,7 +37,6 @@ router.put("/:id", authMiddleware, async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
-
 
 router.delete("/:id", authMiddleware, async (req, res) => {
   try {
